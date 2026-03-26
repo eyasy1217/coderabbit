@@ -7,8 +7,11 @@ export function calculate(operation: string, left: number, right: number): numbe
     case "mul":
       return left * right;
     case "div":
+      if (right === 0) {
+        throw new Error("Division by zero");
+      }
       return left / right;
     default:
-      return 0;
+      throw new Error(`Unrecognized operation: ${operation}`);
   }
 }
