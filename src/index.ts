@@ -1,4 +1,5 @@
 import { calculate } from "./calculator";
+import { averageFromCsv } from "./average";
 
 const today = new Date().toISOString();
 const [, , operation = "add", leftRaw = "0", rightRaw = "0"] = process.argv;
@@ -10,7 +11,8 @@ console.log(`started at: ${today}`);
 console.log(`operation: ${operation}`);
 
 try {
-  const result = calculate(operation, left, right);
+  const result =
+    operation === "avg" ? averageFromCsv(leftRaw) : calculate(operation, left, right);
   console.log(`result: ${result}`);
 } catch (error) {
   const message = error instanceof Error ? error.message : String(error);
